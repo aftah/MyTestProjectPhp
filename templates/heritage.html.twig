@@ -5,10 +5,20 @@
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>{{ controller_name }}</title>
+    <title>
+        {% block titreDuDocument %}
+            Document
+        {% endblock %}
+    </title>
 </head>
 <body>
-<p>Aujourdhui on n'est le {{ "now" | date("d/m/Y H:i", "Europe/Paris")}} </p>
-<h1> Hello {{ name | capitalize }}</h1>
+Header
+<hr>
+{% block corpDuDocument %}
+    Du contenue par defaut du corp du document
+{%  endblock %}
+<hr>
+Footer
+
 </body>
 </html>

@@ -1,0 +1,13 @@
+{% extends 'heritage.html.twig' %}
+
+{% block titreDuDocument %}Hello ma premier page d heritage twig{% endblock %}
+
+
+{% block corpDuDocument %}
+    {{
+        parent()
+    }}
+    <div>
+        <p>Ceci est mon nouveau corp</p>
+    </div>
+{% endblock %}

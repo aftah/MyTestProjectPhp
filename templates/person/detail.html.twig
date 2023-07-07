@@ -1,10 +1,18 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'template.html.twig' %}
+{% block pageTitle %}
+    Details
+{% endblock %}
 {% block body %}
-
+    <div class="alert alert-success">
+        {% if person %}
+        {{ person.firstname }} {{ person.lastname }} à {{ person.age }}
+        {% endif %}
+    </div>
 {% endblock %}
 
 {% block title %}
-
+    {% if person %}
+    {{ person.firstname }} {{ person.lastname }}
+    {% endif %}
 {% endblock %}
 

@@ -1,20 +1,38 @@
-{% extends 'base.html.twig' %}
+{% extends 'template.html.twig' %}
 
-{% block title %}Hello PersonController!{% endblock %}
+{% block title %}Liste des personnes{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+<div class="row">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    {% for person in listPerson %}
+    <div class="card" style="width: 18rem;">
+        <div class="card-body">
+            <h5 class="card-title">{{ person.lastname }}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">{{ person.firstname }} {{ person.lastname }}</h6>
+            <p class="card-text">Age : {{ person.age }}</p>
+            <a href="{{ path('person_detail',{id: person.id}) }}" class="card-link">Detail</a>
+            <a href="{{ path('person_delete',{id: person.id}) }}" class="card-link">Delete</a>
+        </div>
+    </div>
+    {% endfor %}
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Abdelfetah/Desktop/DrummyPhpDev/Symfony project/MyTestProject/src/Controller/PersonController.php'|file_link(0) }}">src/Controller/PersonController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Abdelfetah/Desktop/DrummyPhpDev/Symfony project/MyTestProject/templates/person/index.html.twig'|file_link(0) }}">templates/person/index.html.twig</a></code></li>
-    </ul>
-</div>
+    {% if isPaginated is defined and isPaginated %}
+        <div class="row mt-2">
+            <nav aria-label="Page navigation">
+                <ul class="pagination">
+                    {% if page != 1 %}
+                        <li class="page-item"><a class="page-link" href="{{ path('person_all',{page: page - 1, nbr: nbr}) }}">Previous</a></li>
+                    {% endif %}
+                    {% for i in range(1,nbrTotalPage) %}
+                        <li class="page-item"><a class="page-link" href="{{ path('person_all',{page: i, nbr: nbr}) }}">{{ i }}</a></li>
+                    {% endfor %}
+                    {% if page != nbrTotalPage %}
+                    <li class="page-item"><a class="page-link" href="{{ path('person_all',{page: page + 1, nbr: nbr}) }}">Next</a></li>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+
+    {% endif %}
 {% endblock %}
